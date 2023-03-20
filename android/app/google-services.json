@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "499643230978",
+    "project_id": "mindfuldiary-c80fb",
+    "storage_bucket": "mindfuldiary-c80fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499643230978:android:63f0368d217caf8075b01b",
+        "android_client_info": {
+          "package_name": "dev.nivera.mindfuldiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499643230978-nrma6qjguj310m812og1clvj3u0ogcc7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Nw8-HZqj2_PNCDqKaVjnH7ad8-6DcNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499643230978-nrma6qjguj310m812og1clvj3u0ogcc7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
