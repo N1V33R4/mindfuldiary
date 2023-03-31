@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mindfuldiary/constants/route.dart';
+import 'package:mindfuldiary/constants/routes.dart';
 
 import 'package:mindfuldiary/views/login_view.dart';
 import 'package:mindfuldiary/views/register_view.dart';
@@ -21,6 +21,7 @@ void main() {
       routes: {
         loginRoute: (context) => const LoginView(),
         registerRoute: (context) => const RegisterView(),
+        verifyEmailRoute: (context) => const VerifyEmailView(),
         notesRoute: (context) => const NotesView(),
       },
     ),
@@ -79,7 +80,7 @@ class _NotesViewState extends State<NotesView> {
                 case MenuAction.logout:
                   bool shouldLogout = await showLogOutDialog(context);
                   if (shouldLogout) {
-                    FirebaseAuth.instance.signOut();
+                    await FirebaseAuth.instance.signOut();
                     if (context.mounted) {
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         '/login/',

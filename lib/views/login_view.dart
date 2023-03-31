@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mindfuldiary/constants/route.dart';
+import 'package:mindfuldiary/constants/routes.dart';
 import 'package:mindfuldiary/utilities/show_error_dialog.dart';
 
 class LoginView extends StatefulWidget {
@@ -62,9 +62,15 @@ class _LoginViewState extends State<LoginView> {
               try {
                 await FirebaseAuth.instance
                     .signInWithEmailAndPassword(email: email, password: password);
-                if (context.mounted) {
+                final user = FirebaseAuth.instance.currentUser;
+                if (user?.emailVerified ?? false) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                     notesRoute,
+                    (_) => false,
+                  );
+                } else {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    verifyEmailRoute,
                     (_) => false,
                   );
                 }
@@ -89,7 +95,7 @@ class _LoginViewState extends State<LoginView> {
             onPressed: () {
               Navigator.of(context).pushNamedAndRemoveUntil(
                 registerRoute,
-                (route) => false,
+                (_) => false,
               );
             },
             child: const Text('No account? Register here.'),
