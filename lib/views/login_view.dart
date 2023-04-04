@@ -34,73 +34,76 @@ class _LoginViewState extends State<LoginView> {
       appBar: AppBar(
         title: const Text('Login'),
       ),
-      body: Column(
-        children: <Widget>[
-          TextField(
-            controller: _email,
-            enableSuggestions: false,
-            autocorrect: false,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              hintText: 'Enter your email here',
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              controller: _email,
+              enableSuggestions: false,
+              autocorrect: false,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                hintText: 'Enter your email here',
+              ),
             ),
-          ),
-          TextField(
-            controller: _password,
-            obscureText: true,
-            enableSuggestions: false,
-            autocorrect: false,
-            decoration: const InputDecoration(
-              hintText: 'Enter your password here',
+            TextField(
+              controller: _password,
+              obscureText: true,
+              enableSuggestions: false,
+              autocorrect: false,
+              decoration: const InputDecoration(
+                hintText: 'Enter your password here',
+              ),
             ),
-          ),
-          TextButton(
-            onPressed: () async {
-              final email = _email.text;
-              final password = _password.text;
+            TextButton(
+              onPressed: () async {
+                final email = _email.text;
+                final password = _password.text;
 
-              try {
-                await FirebaseAuth.instance
-                    .signInWithEmailAndPassword(email: email, password: password);
-                final user = FirebaseAuth.instance.currentUser;
-                if (user?.emailVerified ?? false) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    notesRoute,
-                    (_) => false,
-                  );
-                } else {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    verifyEmailRoute,
-                    (_) => false,
-                  );
+                try {
+                  await FirebaseAuth.instance
+                      .signInWithEmailAndPassword(email: email, password: password);
+                  final user = FirebaseAuth.instance.currentUser;
+                  if (user?.emailVerified ?? false) {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      notesRoute,
+                      (_) => false,
+                    );
+                  } else {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      verifyEmailRoute,
+                      (_) => false,
+                    );
+                  }
+                } on FirebaseAuthException catch (e) {
+                  switch (e.code) {
+                    case 'user-not-found':
+                      await showErrorDialog(context, 'User not found.');
+                      break;
+                    case 'wrong-password':
+                      await showErrorDialog(context, 'Wrong credentials.');
+                      break;
+                    default:
+                      await showErrorDialog(context, 'Error: ${e.code}');
+                  }
+                } catch (e) {
+                  await showErrorDialog(context, e.toString());
                 }
-              } on FirebaseAuthException catch (e) {
-                switch (e.code) {
-                  case 'user-not-found':
-                    await showErrorDialog(context, 'User not found.');
-                    break;
-                  case 'wrong-password':
-                    await showErrorDialog(context, 'Wrong credentials.');
-                    break;
-                  default:
-                    await showErrorDialog(context, 'Error: ${e.code}');
-                }
-              } catch (e) {
-                await showErrorDialog(context, e.toString());
-              }
-            },
-            child: const Text('Login'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                registerRoute,
-                (_) => false,
-              );
-            },
-            child: const Text('No account? Register here.'),
-          ),
-        ],
+              },
+              child: const Text('Login'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  registerRoute,
+                  (_) => false,
+                );
+              },
+              child: const Text('No account? Register here.'),
+            ),
+          ],
+        ),
       ),
     );
   }

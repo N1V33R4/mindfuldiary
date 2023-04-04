@@ -94,7 +94,7 @@ class _NotesViewState extends State<NotesView> {
             itemBuilder: (context) => const [
               PopupMenuItem(value: MenuAction.logout, child: Text('Log out')),
             ],
-          )
+          ),
         ],
       ),
     );
