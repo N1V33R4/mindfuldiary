@@ -199,10 +199,6 @@ class NotesService {
     final db = _getDatabaseOrThrow();
     final notes = await db.query(noteTable);
 
-    if (notes.isEmpty) {
-      throw CouldNotFindNote();
-    }
-
     return notes.map((n) => DatabaseNote.fromRow(n));
   }
 
