@@ -1,11 +1,9 @@
-import 'dart:wasm';
-
 import 'package:flutter/material.dart';
 import 'package:mindfuldiary/constants/routes.dart';
 import 'package:mindfuldiary/services/auth/auth_service.dart';
 import 'package:mindfuldiary/services/crud/notes_service.dart';
 
-import '../enums/menu_actions.dart';
+import '../../enums/menu_actions.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({super.key});
@@ -37,6 +35,10 @@ class _NotesViewState extends State<NotesView> {
       appBar: AppBar(
         title: const Text('My Journal'),
         actions: [
+          IconButton(
+            onPressed: () => Navigator.of(context).pushNamed(newNoteRoute),
+            icon: const Icon(Icons.add),
+          ),
           PopupMenuButton<MenuAction>(
             onSelected: (value) async {
               switch (value) {
