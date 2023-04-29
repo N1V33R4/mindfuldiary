@@ -82,7 +82,7 @@ class _NewNoteViewState extends State<NewNoteView> {
     _deleteNoteIfTextIsEmpty();
     _saveNoteIfTextNotEmpty();
 
-    _notesService.close();
+    // _notesService.close();
     _titleController.dispose();
     _textController.dispose();
     super.dispose();
