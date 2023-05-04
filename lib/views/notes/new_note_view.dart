@@ -113,7 +113,7 @@ class _NewNoteViewState extends State<NewNoteView> {
                   TextField(
                     controller: _textController,
                     keyboardType: TextInputType.multiline,
-                    maxLines: null, // expand
+                    maxLines: null, // expand-able
                     decoration: const InputDecoration(
                       hintText: "Start typing your note...",
                     ),
