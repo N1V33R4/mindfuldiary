@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mindfuldiary/utilities/generic_dialog.dart';
+import 'package:mindfuldiary/utilities/dialogs/generic_dialog.dart';
 
 Future<bool> showLogOutDialog(BuildContext context) {
   return showGenericDialog<bool>(

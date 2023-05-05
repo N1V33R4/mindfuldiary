@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mindfuldiary/utilities/generic_dialog.dart';
+import 'package:mindfuldiary/utilities/dialogs/generic_dialog.dart';
 
 Future<void> showErrorDialog(BuildContext context, String msg) {
   return showGenericDialog<void>(
