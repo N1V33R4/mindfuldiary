@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mindfuldiary/constants/routes.dart';
 import 'package:mindfuldiary/services/auth/auth_service.dart';
 import 'package:mindfuldiary/services/crud/notes_service.dart';
-import 'package:mindfuldiary/utilities/logout_dialog.dart';
+import 'package:mindfuldiary/utilities/dialogs/logout_dialog.dart';
 import 'package:mindfuldiary/views/notes/notes_list_view.dart';
 import 'package:mindfuldiary/enums/menu_actions.dart';
 
@@ -38,7 +38,7 @@ class _NotesViewState extends State<NotesView> {
         title: const Text('My Journal'),
         actions: [
           IconButton(
-            onPressed: () => Navigator.of(context).pushNamed(newNoteRoute),
+            onPressed: () => Navigator.of(context).pushNamed(createOrUpdateNoteRoute),
             icon: const Icon(Icons.add),
           ),
           PopupMenuButton<MenuAction>(
@@ -82,6 +82,10 @@ class _NotesViewState extends State<NotesView> {
                           notes: allNotes,
                           onDeleteNote: (note) async {
                             await _notesService.deleteNote(id: note.id);
+                          },
+                          onTap: (note) {
+                            Navigator.of(context)
+                                .pushNamed(createOrUpdateNoteRoute, arguments: note);
                           },
                         );
                       }
