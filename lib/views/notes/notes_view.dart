@@ -25,11 +25,11 @@ class _NotesViewState extends State<NotesView> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   _notesService.close();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _notesService.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,8 +84,10 @@ class _NotesViewState extends State<NotesView> {
                             await _notesService.deleteNote(id: note.id);
                           },
                           onTap: (note) {
-                            Navigator.of(context)
-                                .pushNamed(createOrUpdateNoteRoute, arguments: note);
+                            Navigator.of(context).pushNamed(
+                              createOrUpdateNoteRoute,
+                              arguments: note,
+                            );
                           },
                         );
                       }
